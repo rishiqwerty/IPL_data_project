@@ -33,7 +33,7 @@ def plotting_graph(teams, total):
     plt.bar(teams,total)
     plt.xlabel('Teams')
     plt.ylabel('Total Score')
-    plt.title("Total runs Scored by Teams")
+    plt.title('Total runs Scored by Teams')
     plt.show()
 
 
