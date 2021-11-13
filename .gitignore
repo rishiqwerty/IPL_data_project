@@ -6,3 +6,4 @@ share
 .vscode
 pyvenv.cfg
 check.py
+test.py

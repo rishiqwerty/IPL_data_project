@@ -1,27 +1,40 @@
 import csv
 import matplotlib.pyplot as plt
-with open('deliveries.csv') as csv_file:
-    csv_reader = csv.reader(csv_file, delimiter=',')
-    line_count = 0
-    s = 0
-    players = []
-    score =[]
-    for row in csv_reader:
-        if line_count == 0:
-            print(f'Column names are {", ".join(row)}')
-            line_count += 1
-        else:
-            # print(' '.join(row))
-            if row[2] == 'Royal Challengers Bangalore':
-                if row[6] in players:
-                    score[players.index(row[6])]+=int(row[17])
+
+def top_rcb_batsman():
+    with open('deliveries.csv') as ipl_file:
+        deliveries_reader = csv.DictReader(ipl_file, delimiter=',')
+        players = []
+        score = []
+        top_batsman = []
+
+        for match in deliveries_reader:
+            if match['batting_team'] == 'Royal Challengers Bangalore':
+                # Checking if player is present in player list
+                if match['batsman'] in players:
+                    score[players.index(match['batsman'])] += int(match['total_runs'])
                 else:
-                    players.append(row[6])
-                    score.append(int(row[17]))
-            line_count += 1
-    print(players,score)
-    plt.plot(players,score)
+                    players.append(match['batsman'])
+                    score.append(int(match['total_runs']))
+        
+    top_scorer = sorted(score, reverse=True) 
+
+    # Finding top 10 batsmen of RCB
+    for i in range(10):
+        top_batsman.append(players[score.index(top_scorer[i])])
+
+    top_scorer = top_scorer[:10]
+
+    plotting_graph(top_batsman, top_scorer)
+
+
+def plotting_graph(player, score):
+    plt.figure(figsize = (20, 5))
+    plt.bar(player,score)
     plt.xlabel('Players')
     plt.ylabel('Total Score')
     plt.show()
-    print(f'Processed {line_count} lines.')
+
+
+if __name__ == '__main__':
+    top_rcb_batsman()

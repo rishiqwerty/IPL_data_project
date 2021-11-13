@@ -1,26 +1,33 @@
 import csv
 import matplotlib.pyplot as plt
-with open('Umpires.csv') as csv_file:
-    csv_reader = csv.reader(csv_file, delimiter=',')
-    line_count = 0
-    country = []
-    count = []
-    for row in csv_reader:
-        if line_count == 0:
-            print(f'Column names are {", ".join(row)}')
-            line_count += 1
-        else:
-            if row[1] == 'India':
+
+
+def foreign_umpire():
+    with open('Umpires.csv') as umpire_file:
+        umpire_reader = csv.DictReader(umpire_file, delimiter=',')
+        country = []
+        count = []
+
+        for umpire in umpire_reader:
+            if umpire['Nationality'] == 'India':
                 pass
             else:
-                if row[1] in country:
-                    count[country.index(row[1])] += 1
+                if umpire['Nationality'] in country:
+                    count[country.index(umpire['Nationality'])] += 1
                 else:
-                    country.append(row[1])
+                    country.append(umpire['Nationality'])
                     count.append(1)
-            line_count += 1
-    plt.plot(country,count)
+
+        plotting_graph(country, count)
+
+
+def plotting_graph(country, count):
+    plt.figure(figsize = (20, 10))
+    plt.bar(country,count)
     plt.xlabel('Country')
     plt.ylabel('Number of umpires')
     plt.show()
-print("Number of lines processed: ",line_count)
+
+
+if __name__ == '__main__':
+    foreign_umpire()

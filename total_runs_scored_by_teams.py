@@ -4,28 +4,20 @@ import matplotlib.pyplot as plt
 
 def runs_scored_by_teams():
     with open('deliveries.csv') as deliveries_file:
-        match_reader = csv.reader(deliveries_file, delimiter=',')
-        
-        line_count = 0
-        s = 0
+        match_reader = csv.DictReader(deliveries_file, delimiter=',')
         teams = []
         total = []
 
         # Reading each row of the csv file
         for match in match_reader:
-            # Since first column contains field names, hence we are skipping it
-            if line_count == 0:
-                line_count += 1
+            #Checking if team's name is present in team list
+            if match['batting_team'] in teams:
+                total[teams.index(match['batting_team'])] += int(match['total_runs'])
             else:
-                #Checking if team's name is present in team list
-                if match[2] in teams:
-                    total[teams.index(match[2])] += int(match[17])
-                else:
-                    teams.append(match[2])
-                    total.append(int(match[17]))
-                line_count += 1
+                teams.append(match['batting_team'])
+                total.append(int(match['total_runs']))
 
-    plotting_graph(teams,total)
+    plotting_graph(teams, total)
 
 
 def plotting_graph(teams, total):
