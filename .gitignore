@@ -7,3 +7,5 @@ share
 pyvenv.cfg
 check.py
 test.py
+ipl_key
+ipl_key.pub
