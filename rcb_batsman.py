@@ -16,8 +16,8 @@ def top_rcb_batsman():
                 else:
                     players.append(match['batsman'])
                     score.append(int(match['total_runs']))
-        
-    top_scorer = sorted(score, reverse=True) 
+
+    top_scorer = sorted(score, reverse=True)
 
     # Finding top 10 batsmen of RCB
     for i in range(10):
@@ -29,8 +29,8 @@ def top_rcb_batsman():
 
 
 def plotting_graph(player, score):
-    plt.figure(figsize = (20, 5))
-    plt.bar(player,score)
+    plt.figure(figsize=(20, 5))
+    plt.bar(player, score)
     plt.xlabel('Players')
     plt.ylabel('Total Score')
     plt.show()

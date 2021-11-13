@@ -22,8 +22,8 @@ def foreign_umpire():
 
 
 def plotting_graph(country, count):
-    plt.figure(figsize = (20, 10))
-    plt.bar(country,count)
+    plt.figure(figsize=(20, 10))
+    plt.bar(country, count)
     plt.xlabel('Country')
     plt.ylabel('Number of umpires')
     plt.show()

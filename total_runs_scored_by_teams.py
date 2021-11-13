@@ -1,7 +1,8 @@
+"""CSV for reading csv file matplotlib for garaph plotting"""
 import csv
 import matplotlib.pyplot as plt
 
-
+# Function for finding runs scored by teams
 def runs_scored_by_teams():
     with open('deliveries.csv') as deliveries_file:
         match_reader = csv.DictReader(deliveries_file, delimiter=',')
@@ -20,14 +21,14 @@ def runs_scored_by_teams():
     plotting_graph(teams, total)
 
 
+""" For plotting graph of tems vs score"""
 def plotting_graph(teams, total):
-    plt.figure(figsize = (20, 10))
-    plt.bar(teams,total)
+    plt.figure(figsize=(20, 10))
+    plt.bar(teams, total)
     plt.xlabel('Teams')
     plt.ylabel('Total Score')
     plt.title('Total runs Scored by Teams')
     plt.show()
-
 
 if __name__ == '__main__':
     runs_scored_by_teams()
