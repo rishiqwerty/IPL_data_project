@@ -31,6 +31,7 @@ def top_rcb_batsman():
 def plotting_graph(player, score):
     plt.figure(figsize=(20, 5))
     plt.bar(player, score)
+    plt.title('Top Scorer in Royal Challengers Bangalore')
     plt.xlabel('Players')
     plt.ylabel('Total Score')
     plt.show()
